@@ -17,7 +17,7 @@ function l(s){
 
 var app = express();
 
-var port = 3000;
+var port = 80;
 var first = true;
 var code = 0;
 var access_token = 0;
@@ -30,6 +30,11 @@ app.get('/', function(req,res){
 	if(code === 0)
 		res.redirect('/get_access');
 });
+
+app.get('/health_check', function(req,res){
+	res.sendStatus(200);
+});
+
 app.get('/got_access', function(req,res){
 	code = req.query.code;
 	reddit.auth({"code": code}, function(err, response) {
